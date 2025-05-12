@@ -4,13 +4,21 @@ import CardList from "./components/ui/CardList";
 import Button from "@/components/ui/button";
 import logo from "@/assets/logo.svg";
 import maskot from "@/assets/maskot.svg";
-import { FaEarlybirds, FaXTwitter } from "react-icons/fa6";
+import bg from "@/assets/bg.svg";
+import { FaXTwitter } from "react-icons/fa6";
+import cat from "@/assets/cat.svg";
 import { FaTelegramPlane } from "react-icons/fa";
 import { LuRadical } from "react-icons/lu";
 
 function App() {
   return (
-    <>
+    <div
+      style={{
+        backgroundImage: `url(${bg})`,
+        backgroundSize: "cover",
+        backgroundPosition: "left",
+        backgroundRepeat: "no-repeat",
+      }}>
       <div className="flex flex-row justify-end px-6 pt-6">
         <Button className="flex">
           <LuRadical className="mr-1" />
@@ -19,26 +27,34 @@ function App() {
       </div>
       <div className="min-h-screen flex flex-col text-black">
         <div className="flex flex-col items-center text-center text-white">
-          <img src={logo} alt="Max The Pug" className="w-64 rounded-full" />
+          <img src={logo} alt="Max The Pug" className="max-w-80 rounded-full" />
           <h1 className="text-4xl mb-4">VaultTora</h1>
           <h4 className="mb-4">Hunt the Rare. Keep the Value.</h4>
 
-          <div className="flex gap-4 justify-center">
+          <div className="flex gap-4 justify-center items-center">
             <SocialButton icon={<FaTelegramPlane className="text-2xl" />} />
             <SocialButton icon={<FaXTwitter className="text-2xl" />} />
-            <SocialButton icon={<FaEarlybirds className="text-2xl" />} />
+            <SocialButton
+              icon={
+                <img
+                  src={cat}
+                  alt="GitHub"
+                  className="w-6 h-6 object-contain"
+                />
+              }
+            />
           </div>
         </div>
 
-        <div className="flex flex-row justify-end mx-8 my-6 rotate-30">
-          <div className="flex flex-col gap-4">
+        <div className="flex flex-row justify-end mx-8 overflow-hidden">
+          <div className="flex flex-col gap-4 rotate-22 mb-2">
             <img src={maskot} className="w-28" alt="maskot" />
             <Button>Buy Now</Button>
           </div>
         </div>
 
-        <section className="relative text-white px-4 text-center font-comic bg-black clip-hexagon-vertical h-[2300px]">
-          <div className="relative z-10 my-18 max-w-3xl mx-auto">
+        <section className="relative text-white px-4 text-center font-comic bg-black clip-hexagon-vertical">
+          <div className="relative z-10 mt-14 mb-24 max-w-3xl mx-auto">
             <div>
               <h2 className="text-4xl font-bold mb-6">About VaultTora</h2>
               <p className="mb-4">
@@ -59,14 +75,6 @@ function App() {
 
             <div>
               <h2 className="text-4xl font-bold mb-6">How to Swap</h2>
-              <p className="mb-4">
-                VaultTora is a simple yet powerful platform that lets users swap
-                500 $TORA tokens for a random NFT—common, uncommon, or rare. If
-                you don&apos;t like what you get, no worries—you can swap the
-                NFT back for tokens anytime. There&apos;s a small 10 $TORA fee
-                per NFT swap-back, and that fee gets burned forever, making the
-                token supply more scarce over time.
-              </p>
               <p className="mb-4">1. Swap $TORA to NFT:</p>
               <p className="mb-4">
                 Spend 500 $TORA to receive one random NFT. The rarity is
@@ -85,8 +93,8 @@ function App() {
                 part of the fun.
               </p>
             </div>
+            <SwapInterface />
           </div>
-          <SwapInterface />
         </section>
 
         <section className="flex flex-col items-center justify-center text-center px-4 py-20">
@@ -105,7 +113,7 @@ function App() {
           <CardList />
         </section>
       </div>
-    </>
+    </div>
   );
 }
 

@@ -41,7 +41,7 @@ export default function CardList() {
             />
           </div>
           <div className="p-4 flex items-center justify-center">
-            <h3 className="font-semibold text-center text-lg">{item.name}</h3>
+            <p className="font-semibold text-center text-lg">{item.name}</p>
           </div>
         </div>
       ))}
