@@ -1,0 +1,29 @@
+:root {
+  --background: #0e6eb0;
+  --font: "Chewy", cursive;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font);
+}
+
+h1,
+h2,
+h3 {
+  font-family: "Chewy", cursive;
+}
+
+.clip-hexagon-vertical {
+  /* Landai - Aman untuk teks (terutama heading) */
+  clip-path: polygon(
+    50% 0%,
+    /* Titik atas lebih turun (datar) */ 100% 5%,
+    /* Sisi kanan atas */ 100% 75%,
+    /* Sisi kanan bawah */ 50% 80%,
+    /* Titik bawah lebih naik (datar) */ 0% 75%,
+    /* Sisi kiri bawah */ 0% 5% /* Sisi kiri atas */
+  );
+  min-height: 600px;
+}
