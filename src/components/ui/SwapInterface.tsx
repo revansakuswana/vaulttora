@@ -5,10 +5,18 @@ import Button from "@/components/ui/button";
 export default function SwapInterface() {
   const [fromAmount, setFromAmount] = useState("");
   const [isSwapped, setIsSwapped] = useState(false);
+  const [selectedNFT, setSelectedNFT] = useState(""); // new state
 
-  // Dummy conversion logic
+  const nftOptions = [
+    { id: "nft-1", name: "TORA NFT #001" },
+    { id: "nft-2", name: "TORA NFT #002" },
+    { id: "nft-3", name: "TORA NFT #003" },
+  ];
+
   const handleSwap = () => {
     setIsSwapped(!isSwapped);
+    setFromAmount(""); // reset input saat tukar arah
+    setSelectedNFT(""); // reset pilihan NFT juga
   };
 
   const parsedAmount = parseFloat(fromAmount) || 0;
@@ -27,21 +35,36 @@ export default function SwapInterface() {
         <div className="p-4 rounded-xl border border-gray-600 bg-transparent">
           <div className="text-sm text-white">From</div>
           <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-2">
-              <div>
-                <div className="font-semibold text-white">
-                  {isSwapped ? "TORA NFT" : "TORA"}
-                </div>
-              </div>
+            <div className="font-semibold text-white">
+              {isSwapped ? "TORA NFT" : "TORA"}
             </div>
-            <input
-              type="number"
-              min="0"
-              className="bg-transparent text-right w-24 outline-none"
-              value={fromAmount}
-              onChange={(e) => setFromAmount(e.target.value)}
-              placeholder="0"
-            />
+            {!isSwapped ? (
+              <input
+                type="number"
+                min="0"
+                className="bg-transparent text-right w-24 outline-none"
+                value={fromAmount}
+                onChange={(e) => setFromAmount(e.target.value)}
+                placeholder="0"
+              />
+            ) : (
+              <select
+                value={selectedNFT}
+                onChange={(e) => {
+                  setSelectedNFT(e.target.value);
+                  setFromAmount("1"); // Anggap 1 NFT per swap
+                }}
+                className="bg-transparent border border-gray-500 rounded-md px-2 py-1 text-white">
+                <option value="" disabled>
+                  Pilih NFT
+                </option>
+                {nftOptions.map((nft) => (
+                  <option key={nft.id} value={nft.id} className="text-black">
+                    {nft.name}
+                  </option>
+                ))}
+              </select>
+            )}
           </div>
         </div>
 
@@ -54,12 +77,8 @@ export default function SwapInterface() {
         <div className="p-4 rounded-xl border border-gray-600 bg-transparent">
           <div className="text-sm text-white">To</div>
           <div className="flex items-center justify-between">
-            <div className="flex items-left space-x-2">
-              <div>
-                <div className="font-semibold">
-                  {isSwapped ? "TORA" : "TORA NFT"}
-                </div>
-              </div>
+            <div className="font-semibold">
+              {isSwapped ? "TORA" : "TORA NFT"}
             </div>
             <div className="text-right">{toAmount}</div>
           </div>
