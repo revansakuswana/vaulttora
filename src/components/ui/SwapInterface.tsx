@@ -5,7 +5,7 @@ import Button from "@/components/ui/button";
 export default function SwapInterface() {
   const [fromAmount, setFromAmount] = useState("");
   const [isSwapped, setIsSwapped] = useState(false);
-  const [selectedNFT, setSelectedNFT] = useState(""); // new state
+  const [selectedNFT, setSelectedNFT] = useState("");
 
   const nftOptions = [
     { id: "nft-1", name: "TORA NFT #001" },
@@ -15,18 +15,22 @@ export default function SwapInterface() {
 
   const handleSwap = () => {
     setIsSwapped(!isSwapped);
-    setFromAmount(""); // reset input saat tukar arah
-    setSelectedNFT(""); // reset pilihan NFT juga
+    setFromAmount("");
+    setSelectedNFT("");
   };
 
   const parsedAmount = parseFloat(fromAmount) || 0;
   const toAmount = isSwapped
     ? parsedAmount >= 1
-      ? (parsedAmount * 490).toFixed(0) + " TORA"
+      ? (parsedAmount * 500).toFixed(0) + " TORA"
       : "0 TORA"
     : parsedAmount >= 500
     ? Math.floor(parsedAmount / 500) + " NFT"
     : "0 NFT";
+
+  const handleUseOneNFT = () => {
+    setFromAmount("1");
+  };
 
   return (
     <div className="border border-gray-600 text-white max-w-md mx-auto p-4 rounded-xl shadow-xl">
@@ -52,11 +56,12 @@ export default function SwapInterface() {
                 value={selectedNFT}
                 onChange={(e) => {
                   setSelectedNFT(e.target.value);
-                  setFromAmount("1"); // Anggap 1 NFT per swap
+                  setFromAmount("1");
                 }}
-                className="bg-transparent border border-gray-500 rounded-md px-2 py-1 text-white">
+                className="bg-transparent border border-gray-500 rounded-md px-2 py-1 text-white"
+              >
                 <option value="" disabled>
-                  Pilih NFT
+                  Choose NFT
                 </option>
                 {nftOptions.map((nft) => (
                   <option key={nft.id} value={nft.id} className="text-black">
@@ -66,6 +71,18 @@ export default function SwapInterface() {
               </select>
             )}
           </div>
+
+          {/* Tambah tombol Gunakan 1 NFT */}
+          {isSwapped && (
+            <div className="mt-2">
+              <button
+                onClick={handleUseOneNFT}
+                className="text-xs text-white"
+              >
+                Use 1 TORA NFT
+              </button>
+            </div>
+          )}
         </div>
 
         {/* Swap Button */}
