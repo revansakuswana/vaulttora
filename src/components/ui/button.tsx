@@ -11,11 +11,13 @@ interface ButtonProps {
 
 const variantClasses: Record<VariantColor, string> = {
   primary:
-    "bg-white text-[#B61718] border-white hover:bg-[#131313] hover:text-[#B61718] hover:border-[#131313]",
-  secondary: "bg-white text-[#131313] border-transparent hover:text-white",
-  third: "bg-transparent text-white border-white hover:text-white",
+    "bg-[#3B82F6] text-white border-[#3B82F6] hover:bg-white hover:text-[#3B82F6] hover:border-white",
+  secondary:
+    "bg-[#3B82F6] text-white border-transparent hover:bg-white hover:text-[#3B82F6]",
+  third:
+    "bg-transparent text-[#3B82F6] border-[#3B82F6] hover:bg-[#3B82F6] hover:text-white",
   fourth:
-    "bg-[#131313] text-white border-[#131313] hover:bg-transparent hover:text-[#131313]",
+    "bg-white text-[#3B82F6] border-white hover:bg-transparent hover:text-white hover:border-[#3B82F6]",
 };
 
 export default function Button({
